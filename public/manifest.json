@@ -1,0 +1,29 @@
+{
+  "name": "mdn-quick-action",
+  "description": "test",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://developer.mozilla.org/*/docs/*"
+      ],
+      "js": [
+        "main.js"
+      ],
+      "css": [
+        "main.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "https://github.com/*",
+    "clipboardRead",
+    "clipboardWrite"
+  ]
+}

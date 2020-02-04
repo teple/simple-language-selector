@@ -1,0 +1,12 @@
+button.mdn-quick-action:hover {
+  opacity: 0.7;
+}
+
+button.mdn-quick-action.current-language {
+  background-color: #333;
+  color: #fff;
+  opacity: 1;
+  cursor: default;
+}
+
+
