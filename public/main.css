@@ -1,8 +1,8 @@
-button.mdn-quick-action:hover {
+button.simple-language-selector:hover {
   opacity: 0.7;
 }
 
-button.mdn-quick-action.current-language {
+button.simple-language-selector.current-language {
   background-color: #333;
   color: #fff;
   opacity: 1;

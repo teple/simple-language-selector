@@ -1,7 +1,19 @@
-type SupportLanguage = 'en-US' | 'ja' | 'ko' | 'zh-CN' | 'zh-TW'
-const supportLanguages: SupportLanguage[] = ['en-US', 'ja', 'ko', 'zh-CN', 'zh-TW']
-// type 定義の仕方まだうまくできない。。
+// type SupportLanguage = 'en-US' | 'ja' | 'ko'
+enum SupportLanguage {
+  EN = 'en-US',
+  JA = 'ja',
+  KO = 'ko'
+}
+const SupportLanguages = Object.entries(SupportLanguage).map(([_, l]) => l)
+const isSupportedLanguage = (lang: any): lang is SupportLanguage => {
+  return SupportLanguages.includes(lang)
+}
 
+// type SupportLanguage = 'en-US' | 'ja' | 'ko' | 'zh-CN' | 'zh-TW'
+// const supportLanguages: SupportLanguage[] = ['en-US', 'ja', 'ko']
+// const supportLanguages: SupportLanguage[] = ['en-US', 'ja', 'ko', 'zh-CN', 'zh-TW']
+
+// type 定義の仕方まだうまくできない。。
 interface MakeButtonOptions {
   isAvailable?: boolean
   isCurrentLanguage?: boolean
@@ -12,20 +24,20 @@ interface Language {
   options?: MakeButtonOptions
 }
 
-const convertLanguage = (htmlLang: string): SupportLanguage => {
+const convertLanguage = (htmlLang: string): string => {
   switch (htmlLang) {
     case 'en':
       return 'en-US'
-    case 'zh':
-      return 'zh-CN'
+    // case 'zh':
+    //   return 'zh-CN'
     default:
-      return htmlLang as SupportLanguage
+      return htmlLang
   }
 }
 
 const makeButton = ({ supportLanguage, options }: Language): HTMLButtonElement => {
   const button = document.createElement('button')
-  button.classList.add('mdn-quick-action')
+  button.classList.add('simple-language-selector')
   button.textContent = supportLanguage
   button.style.marginRight = '0.5rem'
   if (options?.isCurrentLanguage) {
@@ -52,49 +64,57 @@ const makeButton = ({ supportLanguage, options }: Language): HTMLButtonElement =
   return button
 }
 
+interface Element {
+  lang?: string
+}
+
 window.setInterval(() => {
-  const existMdnQuickAction = !!document.querySelector('button.mdn-quick-action')
-  if (existMdnQuickAction) {
+  const existSimpleLanguageSelector = !!document.querySelector('button.simple-language-selector')
+  if (existSimpleLanguageSelector) {
     return
   }
 
   const currentLanguage = convertLanguage(document.querySelector('html')!.lang)
-  const availableLanguages: string[] = Array.from(
-    document.querySelector('#language-menu')!.children
-  )
-    .filter((item) => supportLanguages.includes((item as any).lang))
-    .map((item) => (item as any).lang)
+  const collection = document.querySelector('#language-menu')?.children ?? new HTMLCollection()
+  const availableLanguages: SupportLanguage[] = Array.from(collection)
+    .map((item) => {
+      const lang = item.lang
+      if (isSupportedLanguage(lang)) return lang
+      return null
+    })
+    .reduce((ary: SupportLanguage[], lang: SupportLanguage | null) => {
+      if (lang) return [lang].concat(ary)
+      return ary
+    }, [])
 
-  const buttons: HTMLButtonElement[] = supportLanguages
-    .map(
-      (supportLanguage): Language => {
-        if (supportLanguage === currentLanguage) {
-          return {
-            supportLanguage,
-            options: {
-              isCurrentLanguage: true
-            }
-          }
-        }
-
-        if (!availableLanguages.includes(supportLanguage)) {
-          return {
-            supportLanguage,
-            options: {
-              isAvailable: false
-            }
-          }
-        }
-
+  const buttons: HTMLButtonElement[] = SupportLanguages.map(
+    (supportLanguage): Language => {
+      if (supportLanguage === currentLanguage) {
         return {
           supportLanguage,
           options: {
-            isAvailable: true
+            isCurrentLanguage: true
           }
         }
       }
-    )
-    .map((language) => makeButton(language))
+
+      if (!availableLanguages.includes(supportLanguage)) {
+        return {
+          supportLanguage,
+          options: {
+            isAvailable: false
+          }
+        }
+      }
+
+      return {
+        supportLanguage,
+        options: {
+          isAvailable: true
+        }
+      }
+    }
+  ).map((language) => makeButton(language))
 
   const parent = document.querySelector('.dropdown-container')?.parentNode
   const refChild = parent?.childNodes[1]

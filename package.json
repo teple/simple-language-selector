@@ -1,5 +1,5 @@
 {
-  "name": "mdn-quick-action",
+  "name": "simple-language-selector",
   "version": "0.1.0",
   "description": "test",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/teple/mdn-quick-action.git"
+    "url": "git+https://github.com/teple/simple-language-selector.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/teple/mdn-quick-action/issues"
+    "url": "https://github.com/teple/simple-language-selector/issues"
   },
-  "homepage": "https://github.com/teple/mdn-quick-action#readme",
+  "homepage": "https://github.com/teple/simple-language-selector#readme",
   "devDependencies": {
     "@types/chrome": "0.0.91",
     "@types/webpack": "^4.39.5",
