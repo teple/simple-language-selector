@@ -24,17 +24,6 @@ interface Language {
   options?: MakeButtonOptions
 }
 
-const convertLanguage = (htmlLang: string): string => {
-  switch (htmlLang) {
-    case 'en':
-      return 'en-US'
-    // case 'zh':
-    //   return 'zh-CN'
-    default:
-      return htmlLang
-  }
-}
-
 const makeButton = ({ supportLanguage, options }: Language): HTMLButtonElement => {
   const button = document.createElement('button')
   button.classList.add('simple-language-selector')
@@ -64,17 +53,13 @@ const makeButton = ({ supportLanguage, options }: Language): HTMLButtonElement =
   return button
 }
 
-interface Element {
-  lang?: string
-}
-
 window.setInterval(() => {
   const existSimpleLanguageSelector = !!document.querySelector('button.simple-language-selector')
   if (existSimpleLanguageSelector) {
     return
   }
 
-  const currentLanguage = convertLanguage(document.querySelector('html')!.lang)
+  const [, currentLanguage] = location.pathname.split('/')
   const collection = document.querySelector('#language-menu')?.children ?? new HTMLCollection()
   const availableLanguages: SupportLanguage[] = Array.from(collection)
     .map((item) => {
