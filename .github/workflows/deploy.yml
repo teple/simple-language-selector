@@ -68,4 +68,4 @@ jobs:
             https://api.github.com/repos/teple/simple-language-selector/actions/artifacts)
       # json 리스폰스 출력해봄
       - name: json 리스폰스 출력해봄
-        run: echo $artifacts_response
+        run: echo $artifacts_response | jq --raw-output
