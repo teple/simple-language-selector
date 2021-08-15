@@ -70,7 +70,7 @@ jobs:
             https://api.github.com/repos/teple/simple-language-selector/actions/artifacts | \
             jq -r ".artifacts[0].archive_download_url")
           echo $redirect_download_url
-          echo '::set-output name=REDIRECT_DOWNLOAD_URL::$redirect_download_url'
+          echo "::set-output name=REDIRECT_DOWNLOAD_URL::$(echo $redirect_download_url)"
 
       # output test
       - name: output test
