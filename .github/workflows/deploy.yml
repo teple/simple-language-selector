@@ -58,9 +58,11 @@ jobs:
           name: dist.zip
           path: dist.zip
 
-      # 아티팩트 링크를 취득 후 curl ~ jq 로 redirect url 취득
+      # 아티팩트 링크를 취득 후 curl ~ jq 로 redirect url 취득 후 변수로 output
       # -ref: https://zenn.dev/tmsc4zht/scraps/5422c9d1ff3bb3
-      - name: 아티팩트 링크를 취득 후 curl ~ jq 로 redirect url 취득
+      # -ref: https://qiita.com/KEINOS/items/145973e868ba72d716dc
+      - name: 아티팩트 링크를 취득 후 curl ~ jq 로 redirect url 취득 후 변수로 output
+        id: get-redirect-url
         run: |
           redirect_download_url=$(curl \
             -H "Authorization: Bearer ${{ secrets.FOR_FETCH_ARTIFACTS }}" \
@@ -68,15 +70,8 @@ jobs:
             https://api.github.com/repos/teple/simple-language-selector/actions/artifacts | \
             jq -r ".artifacts[0].archive_download_url")
           echo $redirect_download_url
-      # echo redirect_download_url
-      # - name: echo redirect_download_url
-      #   run: echo $redirect_download_url
-      # # 아티팩트 링크를 취득 후 curl ~ jq 로 redirect url 취득
-      # # -ref: https://zenn.dev/tmsc4zht/scraps/5422c9d1ff3bb3
-      # - name: 아티팩트 링크를 취득 후 curl ~ jq 로 redirect url 취득
-        # run: |
-      #     curl \
-      #       -H "Authorization: Bearer ${{ secrets.FOR_FETCH_ARTIFACTS }}" \
-      #       -H "Accept: application/vnd.github.v3+json" \
-      #       https://api.github.com/repos/teple/simple-language-selector/actions/artifacts | \
-      #       jq -r ".artifacts[0].archive_download_url"
+          echo '::set-output name=REDIRECT_DOWNLOAD_URL::$redirect_download_url'
+
+      # output test
+      - name: output test
+        run: echo ${{ steps.get-redirect-url.outputs.REDIRECT_DOWNLOAD_URL }}
