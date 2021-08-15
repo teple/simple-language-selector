@@ -1,0 +1,6 @@
+- 圧縮
+  - zip-release
+- ファイルアップロード
+  - workflow-data-as-artifacts
+- readm アップデート
+  - github-update-Readme
