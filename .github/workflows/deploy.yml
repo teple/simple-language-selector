@@ -79,4 +79,5 @@ jobs:
       - name: output test
         run: echo ${{ steps.get-artifact-id.outputs.ARTIFACT_ID }}
 
-        run: echo ${{ steps.get-redirect-url.outputs.REDIRECT_DOWNLOAD_URL }}
+
+
