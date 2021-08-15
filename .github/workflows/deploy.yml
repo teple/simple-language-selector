@@ -40,9 +40,19 @@ jobs:
       - name: 결과물을 빌드
         run: npm run build:production
 
-      # 다음은 압축
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      # 빌드결과물 압축
+      - name: 빌드결과물 압축
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          filename: 'dist.zip'
+          path: './dist'
+        run: ls -alt
+
+      # # 압축결과를 업로드
+      # - name: 압축결과를 업로드
+      #   uses: thedoctor0/zip-release@master
+      #   with:
+      #     type: 'zip'
+      #     filename: 'dist.zip'
+      #     path: './dist'
