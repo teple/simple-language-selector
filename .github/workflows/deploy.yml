@@ -58,20 +58,25 @@ jobs:
           name: dist.zip
           path: dist.zip
 
-      # 아티팩트 링크를 취득 후 curl ~ jq 로 redirect url 취득 후 변수로 output
-      # -ref: https://zenn.dev/tmsc4zht/scraps/5422c9d1ff3bb3
-      # -ref: https://qiita.com/KEINOS/items/145973e868ba72d716dc
-      - name: 아티팩트 링크를 취득 후 curl ~ jq 로 redirect url 취득 후 변수로 output
-        id: get-redirect-url
+      # 아티팩트 링크를 취득 후 curl ~ jq 로 artifact_id 취득 후 변수로 output
+      # - ref
+      #   - https://zenn.dev/tmsc4zht/scraps/5422c9d1ff3bb3
+      #   - https://qiita.com/KEINOS/items/145973e868ba72d716dc
+      #   - https://docs.github.com/ja/actions/creating-actions/metadata-syntax-for-github-actions#outputs
+      #   - https://github.com/actions/upload-artifact/issues/50#issuecomment-702470267
+      - name: 아티팩트 링크를 취득 후 curl ~ jq 로 artifact_id 취득 후 변수로 output
+        id: get-artifact-id
         run: |
-          redirect_download_url=$(curl \
+          artifact_id=$(curl \
             -H "Authorization: Bearer ${{ secrets.FOR_FETCH_ARTIFACTS }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/teple/simple-language-selector/actions/artifacts | \
-            jq -r ".artifacts[0].archive_download_url")
-          echo $redirect_download_url
-          echo "::set-output name=REDIRECT_DOWNLOAD_URL::$(echo $redirect_download_url)"
+            jq -r ".artifacts[0].artifact_id")
+          echo $artifact_id
+          echo "::set-output name=ARTIFACT_ID::$(echo $artifact_id)"
 
       # output test
       - name: output test
+        run: echo ${{ steps.get-artifact-id.outputs.ARTIFACT_ID }}
+
         run: echo ${{ steps.get-redirect-url.outputs.REDIRECT_DOWNLOAD_URL }}
