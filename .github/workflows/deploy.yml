@@ -82,6 +82,8 @@ jobs:
       # Run script "updateReadme.js"
       # ref: https://dev.to/curtiscodes/self-updating-github-profile-readme-with-javascript-lhm
       - name: Update README
+        env:
+          ARTIFACT_ID: ${{ steps.get-artifact-id.outputs.ARTIFACT_ID }}
         run: |-
           node updateReadme.js
           cat README.md

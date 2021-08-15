@@ -7,7 +7,7 @@ function readWriteAsync() {
       throw err
     }
 
-    const updatedMd = data.replace(/\(https:\/\/github.com\)/, '(https://www.google.co.jp)')
+    const updatedMd = data.replace(/\(https:\/\/github.com\)/, `(${process.env.ARTIFACT_ID})`)
 
     // Write the new README
     fs.writeFile('README.md', updatedMd, 'utf-8', (err) => {
