@@ -58,15 +58,24 @@ jobs:
           name: dist.zip
           path: dist.zip
 
+      # # 아티팩트 링크를 취득 후 curl ~ jq 로 redirect url 취득
+      # # -ref: https://zenn.dev/tmsc4zht/scraps/5422c9d1ff3bb3
+      # - name: 아티팩트 링크를 취득 후 curl ~ jq 로 redirect url 취득
+      #   run: |
+      #     redirect_download_url=$(curl \
+      #       -H "Authorization: token ${{ secrets.FOR_FETCH_ARTIFACTS }}" \
+      #       -H "Accept: application/vnd.github.v3+json" \
+      #       "https://api.github.com/repos/teple/simple-language-selector/actions/artifacts" | \
+      #       jq -r ".artifacts[0].archive_download_url")
+      # # echo redirect_download_url
+      # - name: echo redirect_download_url
+      #   run: echo $redirect_download_url
       # 아티팩트 링크를 취득 후 curl ~ jq 로 redirect url 취득
       # -ref: https://zenn.dev/tmsc4zht/scraps/5422c9d1ff3bb3
       - name: 아티팩트 링크를 취득 후 curl ~ jq 로 redirect url 취득
         run: |
-          redirect_download_url=$(curl \
-            -H "Authorization: token ${{ secrets.FOR_FETCH_ARTIFACTS }}" \
+          curl \
+            -H "Authorization: token '${{ secrets.FOR_FETCH_ARTIFACTS }}'" \
             -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/teple/simple-language-selector/actions/artifacts" | \
-            jq -r ".artifacts[0].archive_download_url")
-      # echo redirect_download_url
-      - name: echo redirect_download_url
-        run: echo $redirect_download_url
+            https://api.github.com/repos/teple/simple-language-selector/actions/artifacts | \
+            jq -r ".artifacts[0].archive_download_url"
