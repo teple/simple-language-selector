@@ -1,12 +1,28 @@
-button.simple-language-selector:hover {
-  opacity: 0.7;
+button.simple-language-selector {
+  font-weight: bold;
+  padding: 2px 12px;
+  border-radius: 4px;
+  border: 2px solid #9b9b9b;
+  background-color: #f4f4f4;
+  cursor: pointer;
 }
 
-button.simple-language-selector.current-language {
+button.simple-language-selector:hover {
   background-color: #333;
   color: #fff;
-  opacity: 1;
+}
+
+button.simple-language-selector[disabled],
+button.simple-language-selector[disabled]:hover {
+  background-color: #f4f4f4;
+  color:rgba(16, 16, 16, 0.3);
   cursor: default;
 }
 
-
+button.simple-language-selector.current-language,
+button.simple-language-selector.current-language:hover {
+  border: 2px solid #9b9b9b;
+  background-color: #333;
+  color: #fff;
+  cursor: default;
+}
