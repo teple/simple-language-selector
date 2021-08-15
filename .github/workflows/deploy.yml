@@ -47,7 +47,8 @@ jobs:
           type: 'zip'
           filename: 'dist.zip'
           path: './dist'
-        run: ls -alt
+      # 압축 후 출력
+      - run: ls -alt
 
       # # 압축결과를 업로드
       # - name: 압축결과를 업로드
