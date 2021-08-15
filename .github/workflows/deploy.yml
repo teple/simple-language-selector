@@ -79,5 +79,20 @@ jobs:
       - name: output test
         run: echo ${{ steps.get-artifact-id.outputs.ARTIFACT_ID }}
 
+      # Run script "updateReadme.js"
+      # ref: https://dev.to/curtiscodes/self-updating-github-profile-readme-with-javascript-lhm
+      - name: Update README
+        run: |-
+          node updateReadme.js
+          cat README.md
 
+      # Commit changes
+      - name: Commit and push if changed
+        run: |-
+          git diff
+          git config --global user.email "stotr2@gmail.com"
+          git config --global user.name "teple"
+          git add -A
+          git commit -m "Updated Readme" || exit 0
+          git push
 
