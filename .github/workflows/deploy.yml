@@ -71,7 +71,7 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.FOR_FETCH_ARTIFACTS }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/teple/simple-language-selector/actions/artifacts | \
-            jq -r ".artifacts[0].artifact_id")
+            jq -r ".artifacts[0].id")
           echo $artifact_id
           echo "::set-output name=ARTIFACT_ID::$(echo $artifact_id)"
 
