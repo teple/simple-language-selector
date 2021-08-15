@@ -1,6 +1,6 @@
 ## 📦 Bundle Download Link
 
-[Click Here](https://github.com)
+[Click Here](https://www.google.co.jp)
 ## ScreenShot
 
 ![src1](https://user-images.githubusercontent.com/32691296/73776080-7a5b6f80-47ca-11ea-9a40-992fb06eefe0.png)
