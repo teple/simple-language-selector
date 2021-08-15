@@ -24,7 +24,7 @@ jobs:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-                        ${{ runner.os }}-node-
+            ${{ runner.os }}-node-
 
       # Node 14.x를 사용
       - name: 노드 14 사용
@@ -57,3 +57,13 @@ jobs:
         with:
           name: dist.zip
           path: dist.zip
+
+      # 아티팩트 링크를 취득 후 출력해봄
+      # -ref: https://zenn.dev/tmsc4zht/scraps/5422c9d1ff3bb3
+      - name: 아티팩트 링크를 취득 후 출력해봄
+        run: |
+          artifacts_response=$(curl \
+            -H "Authorization: token ${{ secrets.FOR_FETCH_ARTIFACTS }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/teple/simple-language-selector/actions/artifacts)
+        run: echo $artifacts_response
