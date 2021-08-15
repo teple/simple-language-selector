@@ -48,12 +48,12 @@ jobs:
           filename: 'dist.zip'
           path: './dist'
       # 압축 후 출력
-      - run: ls -alt
+      - name: 압축 후 출력
+        run: ls -alt
 
-      # # 압축결과를 업로드
-      # - name: 압축결과를 업로드
-      #   uses: thedoctor0/zip-release@master
-      #   with:
-      #     type: 'zip'
-      #     filename: 'dist.zip'
-      #     path: './dist'
+      # 압축결과를 업로드
+      - name: 압축결과를 업로드
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist.zip
+          path: dist.zip
