@@ -24,13 +24,18 @@
     "@typescript-eslint/eslint-plugin": "^2.12.0",
     "@typescript-eslint/parser": "^2.12.0",
     "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^6.2.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "mini-css-extract-plugin": "^2.3.0",
+    "node-sass": "^6.0.1",
     "prettier": "^1.19.1",
+    "sass-loader": "^10",
     "ts-loader": "^6.2.0",
     "typescript": "^3.7.4",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-fix-style-only-entries": "^0.6.1"
   }
 }
