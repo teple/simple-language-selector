@@ -83,7 +83,7 @@ const buttons: HTMLButtonElement[] = configuredLanguages
   .map((parameters) => makeButton(parameters))
 
 const $parent = document.querySelector('.breadcrumb-locale-container')
-const [_$originalBreadcrumb, $originalLocaleChanger] = Array.from($parent?.childNodes!)
+const [, $originalLocaleChanger] = Array.from($parent?.childNodes!)
 const buttonsContainer = document.createElement('div')
 buttonsContainer.classList.add('simple-language-selector-container')
 buttonsContainer.style.margin = '0 0 0 auto'

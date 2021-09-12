@@ -3,11 +3,6 @@
   "description": "test",
   "version": "0.1.0",
   "manifest_version": 2,
-  "background": {
-    "scripts": [
-      "background.js"
-    ]
-  },
   "content_scripts": [
     {
       "matches": [
@@ -22,7 +17,6 @@
     }
   ],
   "permissions": [
-    "https://github.com/*",
     "clipboardRead",
     "clipboardWrite"
   ]

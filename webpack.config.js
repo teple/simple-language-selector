@@ -9,7 +9,6 @@ module.exports = {
   mode: process.env.NODE_ENV || 'development',
   devtool: 'inline-source-map',
   entry: {
-    background: `${__dirname}/src/background.ts`,
     main: `${__dirname}/src/main.ts`
   },
   module: {
