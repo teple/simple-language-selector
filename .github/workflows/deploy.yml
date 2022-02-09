@@ -66,11 +66,11 @@ jobs:
       #   - https://docs.github.com/ja/actions/creating-actions/metadata-syntax-for-github-actions#outputs
       #   - https://github.com/actions/upload-artifact/issues/50#issuecomment-702470267
       - name: 아티팩트 링크를 취득 후 curl ~ jq 로 artifact_id 취득 후 변수로 output
+        # -H "Authorization: Bearer ${{ secrets.FOR_FETCH_ARTIFACTS }}" \
+        # -H "Accept: application/vnd.github.v3+json" \
         id: get-artifact-id
         run: |
           artifact_id=$(curl \
-            -H "Authorization: Bearer ${{ secrets.FOR_FETCH_ARTIFACTS }}" \
-            -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/teple/simple-language-selector/actions/artifacts | \
             jq -r ".artifacts[0].id")
           echo $artifact_id
