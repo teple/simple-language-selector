@@ -1,6 +1,6 @@
 ## 📦 Bundle Download Link
 
-[Click Here](https://github.com/teple/simple-language-selector/suites/3504665218/artifacts/83534907)
+[Click Here](https://github.com/teple/simple-language-selector/suites/3504665218/artifacts/160427485)
 
 ## Usage
 
