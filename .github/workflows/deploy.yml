@@ -3,7 +3,7 @@ name: 빌드 ~ 파일 업로드 ~ readme 다운로드 링크 갱신
 # master 에 푸쉬되었을 때 실행
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -40,23 +40,24 @@ jobs:
       - name: 결과물을 빌드
         run: npm run build:production
 
-      # 빌드결과물 압축
-      - name: 빌드결과물 압축
-        uses: thedoctor0/zip-release@master
-        with:
-          type: 'zip'
-          filename: 'dist.zip'
-          path: './dist'
-      # 압축 후 출력
-      - name: 압축 후 출력
-        run: ls -alt
+      # # 빌드결과물 압축
+      # - name: 빌드결과물 압축
+      #   uses: thedoctor0/zip-release@master
+      #   with:
+      #     type: 'zip'
+      #     filename: 'dist.zip'
+      #     path: './dist'
+      # # 압축 후 출력
+      # - name: 압축 후 출력
+      #   run: ls -alt
 
       # 압축결과를 업로드
       - name: 압축결과를 업로드
         uses: actions/upload-artifact@v2
         with:
           name: dist.zip
-          path: dist.zip
+          # path: dist.zip
+          path: dist
 
       # 아티팩트 링크를 취득 후 curl ~ jq 로 artifact_id 취득 후 변수로 output
       # - ref
@@ -97,4 +98,3 @@ jobs:
           git add -A
           git commit -m "Updated Readme" || exit 0
           git push
-
